@@ -11,7 +11,7 @@ export const AddNewItem = ({ onAdd, dark, toggleButtonText }: AddNewItemProps) =
     const [ showForm, setShowForm ] = useState(false)
 
     if (showForm) {
-        return null
+        
     }
 
     return <AddItemButton dark={dark} onClick={() => setShowForm(true)}>{toggleButtonText}</AddItemButton>
