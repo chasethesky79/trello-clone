@@ -1,4 +1,4 @@
-import { createContext, FC, FunctionComponent, useContext } from 'react'
+import { createContext, FunctionComponent } from 'react'
 
 type Task = {
     id: string
@@ -44,7 +44,7 @@ type AppStateContextProps = {
     getTasksByListId: (listId: string) => Task[]
 }
 
-const AppStateContext = createContext<AppStateContextProps>({} as AppStateContextProps)
+export const AppStateContext = createContext<AppStateContextProps>({} as AppStateContextProps)
 export const AppStateProvider: FunctionComponent<Props> = ({ children }) => {
     const { lists } = appData
     const getTasksByListId = (listId: string) => lists.find(list => list.id === listId)?.tasks ?? []
