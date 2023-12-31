@@ -9,7 +9,7 @@ function App() {
   const { lists } = useContext(AppStateContext)
   return (
     <AppContainer>
-      {lists?.map(({ id, text }) => <Column id={id} text={text}/>)}
+      {lists?.map(({ id, text }) => <Column id={id} text={text} key={id}/>)}
       <AddNewItem toggleButtonText='+ Add another list' onAdd={() => console.log(`Hello`)} dark={false}/>
     </AppContainer>
   );

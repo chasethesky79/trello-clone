@@ -16,7 +16,7 @@ export const Column = ({ text, id }: ColumnProps) => {
     return (
         <ColumnContainer>
         <ColumnTitle>{ text }</ColumnTitle>
-            {tasks?.map(({ id, text }) => <Card id={id} text={text}/>)}
+            {tasks?.map(({ id, text }) => <Card id={id} text={text} key={id}/>)}
             <AddNewItem dark={true} toggleButtonText='+ Add another card' onAdd={(text) => setItems([...items, text])}/>
         </ColumnContainer>
     )
