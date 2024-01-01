@@ -1,6 +1,6 @@
 import { createContext, FunctionComponent } from 'react'
 
-type Task = {
+export type Task = {
     id: string
     text: string
 }
