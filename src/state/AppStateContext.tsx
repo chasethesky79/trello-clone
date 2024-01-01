@@ -1,4 +1,6 @@
-import { createContext, FunctionComponent } from 'react'
+import { createContext, Dispatch, FunctionComponent, useReducer } from 'react'
+import appStateReducer from '../reducers/appStateReducer'
+import { Action } from './actions'
 
 export type Task = {
     id: string
@@ -41,14 +43,16 @@ interface Props {
 
 type AppStateContextProps = {
     lists: List[],
-    getTasksByListId: (listId: string) => Task[]
+    getTasksByListId: (listId: string) => Task[],
+    dispatch: Dispatch<Action>
 }
 
 export const AppStateContext = createContext<AppStateContextProps>({} as AppStateContextProps)
 export const AppStateProvider: FunctionComponent<Props> = ({ children }) => {
-    const { lists } = appData
+    const[state, dispatch] = useReducer(appStateReducer, appData)
+    const { lists } = state
     const getTasksByListId = (listId: string) => lists.find(list => list.id === listId)?.tasks ?? []
     return (
-        <AppStateContext.Provider value={{ lists, getTasksByListId }}>{children}</AppStateContext.Provider>
+        <AppStateContext.Provider value={{ lists, getTasksByListId, dispatch }}>{children}</AppStateContext.Provider>
     )
 }

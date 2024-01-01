@@ -2,7 +2,7 @@ import { Action, ActionType, AddTaskAction } from "../state/actions";
 import { AppState, List, Task } from "../state/AppStateContext";
 import { nanoid } from 'nanoid'
 
-export default function appReducer(state: AppState, action: Action): AppState {
+export default function appStateReducer(state: AppState, action: Action): AppState {
    switch(action.type) {
      case ActionType.ADD_LIST:
         return {

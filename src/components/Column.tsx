@@ -1,5 +1,4 @@
-import { useContext, useReducer } from 'react';
-import appReducer from '../reducers/appStateReducer';
+import { useContext } from 'react';
 import { addTask } from '../state/actions';
 import { AppStateContext } from '../state/AppStateContext';
 import { ColumnContainer, ColumnTitle } from '../styles';
@@ -12,12 +11,12 @@ type ColumnProps = {
 }
 
 export const Column = ({ text, id }: ColumnProps) => {
-    const { lists } = useContext(AppStateContext)
-    const [state, dispatch] = useReducer(appReducer, { lists })
+    const { dispatch, getTasksByListId } = useContext(AppStateContext)
+    const tasks = getTasksByListId(id)
     return (
         <ColumnContainer>
         <ColumnTitle>{ text }</ColumnTitle>
-            {state?.lists?.find(list => list.id === id)?.tasks?.map(({ id, text }) => <Card id={id} text={text} key={id}/>)}
+            {tasks?.map(({ id, text }) => <Card id={id} text={text} key={id}/>)}
             <AddNewItem dark={true} toggleButtonText='+ Add another card' onAdd={(text) => dispatch(addTask(text, id))}/>
         </ColumnContainer>
     )
