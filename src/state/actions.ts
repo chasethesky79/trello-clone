@@ -1,14 +1,14 @@
-enum ActionType {
+export enum ActionType {
     ADD_TASK = 'ADD_TASK',
     ADD_LIST = 'ADD_LIST'
 }
 
-interface AddListAction {
+export interface AddListAction {
     type: ActionType.ADD_LIST,
     payload: string
 }
 
-interface AddTaskAction {
+export interface AddTaskAction {
     type: ActionType.ADD_TASK,
     payload: { text: string, listId: string }
 }

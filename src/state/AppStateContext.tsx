@@ -5,13 +5,13 @@ type Task = {
     text: string
 }
 
-type List = {
+export type List = {
    id: string;
    text: string;
-   tasks: Task[]
+   tasks?: Task[]
 }
 
-type AppState = {
+export type AppState = {
     lists: List[]
 }
 

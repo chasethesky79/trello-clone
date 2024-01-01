@@ -1,4 +1,6 @@
-import { useState, useContext } from 'react';
+import { useContext, useReducer } from 'react';
+import appReducer from '../reducers/appStateReducer';
+import { addTask } from '../state/actions';
 import { AppStateContext } from '../state/AppStateContext';
 import { ColumnContainer, ColumnTitle } from '../styles';
 import { AddNewItem } from './AddNewItem';
@@ -10,14 +12,13 @@ type ColumnProps = {
 }
 
 export const Column = ({ text, id }: ColumnProps) => {
-    const [items, setItems] = useState<Array<string>>(['Generate App Scaffold', 'Learn Typescript', 'Begin to use static typing']);
-    const { getTasksByListId } = useContext(AppStateContext)
-    const tasks = getTasksByListId(id)
+    const { lists } = useContext(AppStateContext)
+    const [state, dispatch] = useReducer(appReducer, { lists })
     return (
         <ColumnContainer>
         <ColumnTitle>{ text }</ColumnTitle>
-            {tasks?.map(({ id, text }) => <Card id={id} text={text} key={id}/>)}
-            <AddNewItem dark={true} toggleButtonText='+ Add another card' onAdd={(text) => setItems([...items, text])}/>
+            {state?.lists?.find(list => list.id === id)?.tasks?.map(({ id, text }) => <Card id={id} text={text} key={id}/>)}
+            <AddNewItem dark={true} toggleButtonText='+ Add another card' onAdd={(text) => dispatch(addTask(text, id))}/>
         </ColumnContainer>
     )
 }
