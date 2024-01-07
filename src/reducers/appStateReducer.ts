@@ -2,6 +2,7 @@ import { Action, ActionType, AddTaskAction } from "../state/actions";
 import { AppState, List, Task } from "../state/AppStateContext";
 import { nanoid } from 'nanoid'
 import { findItemIndexById, moveItem } from "../utils/arrayUtils";
+import { DragItem } from "../DragItem";
 
 export default function appStateReducer(state: AppState, action: Action): AppState {
    switch(action.type) {
@@ -32,5 +33,12 @@ export default function appStateReducer(state: AppState, action: Action): AppSta
             ...state,
             lists: moveItem([...state.lists], draggedIndex, hoverIndex)
         }
+    case ActionType.SET_DRAGGED_ITEM:
+        return {
+            ...state,
+            draggedItem: action.payload
+        }
    }
+
+
 }
