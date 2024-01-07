@@ -1,6 +1,7 @@
 import { Action, ActionType, AddTaskAction } from "../state/actions";
 import { AppState, List, Task } from "../state/AppStateContext";
 import { nanoid } from 'nanoid'
+import { findItemIndexById, moveItem } from "../utils/arrayUtils";
 
 export default function appStateReducer(state: AppState, action: Action): AppState {
    switch(action.type) {
@@ -22,6 +23,14 @@ export default function appStateReducer(state: AppState, action: Action): AppSta
                 }
                 return list
             })
+        }
+    case ActionType.MOVE_LIST:
+        const { draggedId, hoverId } = action.payload
+        const draggedIndex = findItemIndexById(state.lists, draggedId)
+        const hoverIndex = findItemIndexById(state.lists, hoverId)
+        return {
+            ...state,
+            lists: moveItem([...state.lists], draggedIndex, hoverIndex)
         }
    }
 }
