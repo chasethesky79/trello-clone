@@ -1,4 +1,4 @@
-enum DragItemType {
+export enum DragItemType {
     COLUMN = 'COLUMN',
     CARD = 'CARD'
 }

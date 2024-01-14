@@ -34,4 +34,4 @@ const addList = (text: string): Action => ({ type: ActionType.ADD_LIST, payload:
 const moveList = (draggedId: string, hoverId: string) => ({ type: ActionType.MOVE_LIST, payload: { draggedId, hoverId }})
 const setDraggedItem = (draggedItem: DragItem | null) => ({ type: ActionType.SET_DRAGGED_ITEM, payload: draggedItem })
 
-export { addList, addTask, moveList }
+export { addList, addTask, moveList, setDraggedItem }
