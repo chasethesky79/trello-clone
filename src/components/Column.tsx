@@ -8,6 +8,7 @@ import { AddNewItem } from './AddNewItem';
 import { Card } from './Card';
 import { useDrop } from 'react-dnd'
 import { throttle } from 'throttle-debounce-ts'
+import { isHidden } from '../utils/isHidden';
 
 
 type ColumnProps = {
@@ -31,9 +32,9 @@ export const Column = ({ text, id }: ColumnProps) => {
     })
     
     drag(drop(ref))
-    
+
     return (
-        <ColumnContainer>
+        <ColumnContainer isHidden={isHidden(draggedItem, DragItemType.COLUMN, draggedItem?.id)}>
         <ColumnTitle>{ text }</ColumnTitle>
             {tasks?.map(({ id, text }) => <Card id={id} text={text} key={id}/>)}
             <AddNewItem dark={true} toggleButtonText='+ Add another card' onAdd={(text) => dispatch(addTask(text, id))}/>
