@@ -39,6 +39,4 @@ export default function appStateReducer(state: AppState, action: Action): AppSta
             draggedItem: action.payload
         }
    }
-
-
 }

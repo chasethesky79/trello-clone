@@ -1,4 +1,5 @@
-import { createContext, Dispatch, FunctionComponent, useReducer } from 'react'
+import { createContext, Dispatch, FunctionComponent, useEffect, useReducer } from 'react'
+import { save } from '../api'
 import { DragItem } from '../DragItem'
 import appStateReducer from '../reducers/appStateReducer'
 import { Action } from './actions'
@@ -56,6 +57,10 @@ export const AppStateProvider: FunctionComponent<Props> = ({ children }) => {
     const[state, dispatch] = useReducer(appStateReducer, appData)
     const { lists, draggedItem } = state
     const getTasksByListId = (listId: string) => lists.find(list => list.id === listId)?.tasks ?? []
+
+    useEffect(() => {
+        save(state)
+    }, [state])
     return (
         <AppStateContext.Provider value={{ lists, getTasksByListId, dispatch, draggedItem }}>{children}</AppStateContext.Provider>
     )
