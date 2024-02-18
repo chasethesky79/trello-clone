@@ -15,7 +15,7 @@ export default function appStateReducer(state: AppState, action: Action): AppSta
         const { text, listId } = (action as AddTaskAction)?.payload
         return {
             ...state,
-            lists: state.lists.map((list: List) => {
+            lists: state?.lists?.map((list: List) => {
                 if (list.id === listId) {
                     return {
                         ...list,
@@ -27,11 +27,11 @@ export default function appStateReducer(state: AppState, action: Action): AppSta
         }
     case ActionType.MOVE_LIST:
         const { draggedId, hoverId } = action.payload
-        const draggedIndex = findItemIndexById(state.lists, draggedId)
-        const hoverIndex = findItemIndexById(state.lists, hoverId)
+        const draggedIndex = findItemIndexById(state?.lists, draggedId)
+        const hoverIndex = findItemIndexById(state?.lists, hoverId)
         return {
             ...state,
-            lists: moveItem([...state.lists], draggedIndex, hoverIndex)
+            lists: moveItem([...state?.lists], draggedIndex, hoverIndex)
         }
     case ActionType.SET_DRAGGED_ITEM:
         return {
